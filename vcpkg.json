@@ -1,0 +1,11 @@
+{
+  "name": "netstrum",
+  "version": "0.1.0",
+  "dependencies": [
+    "detours",
+    "fmt",
+    "asio",
+    "boost-log",
+    "boost-system"
+  ]
+}

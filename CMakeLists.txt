@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.10)
 
 project(netstrum)
 
+find_package(Boost COMPONENTS log system REQUIRED)
+find_package(detours CONFIG REQUIRED)
+find_package(fmt CONFIG REQUIRED)
+find_package(asio CONFIG REQUIRED)
+
 include_directories(
     ${Boost_INCLUDE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/logging/
@@ -12,8 +17,6 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core/hooking/
     ${CMAKE_CURRENT_SOURCE_DIR}/src/dll/
 )
-
-find_package(Boost COMPONENTS log system REQUIRED)
 
 add_library(netstrum_dll SHARED
     src/core/event/Event.cpp
@@ -28,10 +31,13 @@ add_library(netstrum_dll SHARED
     src/dll/PacketInstrumentationDLL.cpp
 )
 
-# find_package(Detours REQUIRED)
-# target_link_libraries(netstrum_dll Detours)
-
-target_link_libraries(netstrum_dll ${Boost_LIBRARIES})
+target_link_libraries(netstrum_dll
+    PRIVATE
+        ${Boost_LIBRARIES}
+        detours
+        fmt::fmt
+        asio::asio
+)
 
 install(TARGETS netstrum_dll DESTINATION bin)
 
