@@ -35,4 +35,13 @@ target_link_libraries(netstrum_dll ${Boost_LIBRARIES})
 
 install(TARGETS netstrum_dll DESTINATION bin)
 
+# Add optional subprojects when build scripts are present
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/dll/CMakeLists.txt")
+    add_subdirectory(dll)
+endif()
+
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gui/CMakeLists.txt")
+    add_subdirectory(gui)
+endif()
+
 # add_subdirectory(tests)
