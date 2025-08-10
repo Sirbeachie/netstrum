@@ -1,0 +1,13 @@
+{
+  "name": "netstrum",
+  "version-string": "0.1.0",
+  "dependencies": [
+    "boost-log",
+    "boost-system",
+    "fmt",
+    {
+      "name": "detours",
+      "platform": "windows"
+    }
+  ]
+}
